@@ -5,9 +5,8 @@
   "author": "Chanon Roy",
   "license": "MIT",
   "scripts": {
-    "start": "webpack --config webpack.config.js --hide-modules",
-    "dev": "cross-env NODE_ENV=development webpack --hide-modules",
-    "build": "cross-env NODE_ENV=production webpack --hide-modules"
+    "dev": "cross-env NODE_ENV=dev webpack --watch --hide-modules",
+    "build": "cross-env NODE_ENV=prod webpack --hide-modules"
   },
   "devDependencies": {
     "babel-core": "^6.24.1",
@@ -24,5 +23,10 @@
     "sass-loader": "^6.0.3",
     "style-loader": "^0.16.1",
     "webpack": "^2.4.1"
+  },
+  "dependencies": {
+    "axios": "^0.16.1",
+    "element-ui": "^1.2.9",
+    "vue": "^2.3.0"
   }
 }
