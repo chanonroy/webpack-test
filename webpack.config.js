@@ -11,6 +11,7 @@ var DIST_DIR = path.resolve(__dirname, './dist');
 module.exports = {
   entry: {
     main: path.join(SRC_DIR, 'js/main.js'),
+    discovery: path.join(SRC_DIR, 'js/discovery.js'),
     vendor: path.join(SRC_DIR, 'js/vendor.js')
   },
   output: {
@@ -19,7 +20,9 @@ module.exports = {
   },
   resolve: {
     alias: {
-      vue: process.env.NODE_ENV === 'prod' ? 'vue/dist/vue.min.js' : 'vue/dist/vue.js'
+      vue: process.env.NODE_ENV === 'prod' ? 'vue/dist/vue.min.js' : 'vue/dist/vue.js',
+      axios: 'axios/dist/axios.min.js',
+      lodash: 'lodash/lodash.min.js'
     }
   },
   module: {
@@ -102,10 +105,10 @@ if (process.env.NODE_ENV === 'prod') {
   module.exports.plugins = (module.exports.plugins || []).concat([
     new webpack.DefinePlugin({ 'process.env': { NODE_ENV: '"prod"' } }),
 
-    new webpack.optimize.UglifyJsPlugin({
-      sourceMap: false,
-      compress: { warnings: false }
-    }),
+    // new webpack.optimize.UglifyJsPlugin({
+    //   sourceMap: false,
+    //   compress: { warnings: false },
+    // }),
 
     new webpack.LoaderOptionsPlugin({ minimize: true }),
 
