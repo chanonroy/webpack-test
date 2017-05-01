@@ -5,8 +5,8 @@ var CleanWebpackPlugin = require('clean-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 var BASE_DIR = path.resolve(__dirname);
-var SRC_DIR = path.resolve(__dirname, './src');
-var DIST_DIR = path.resolve(__dirname, './dist');
+var SRC_DIR = path.resolve(__dirname, './django/src');
+var DIST_DIR = path.resolve(__dirname, './django/dist');
 
 module.exports = {
   entry: {
@@ -16,6 +16,7 @@ module.exports = {
   },
   output: {
     path: DIST_DIR,
+    publicPath: '',
     filename: 'js/[name].[hash].js', // '[name].[hash].js'
   },
   resolve: {
@@ -81,20 +82,27 @@ module.exports = {
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor'
     }),
-    new CleanWebpackPlugin(['dist'], {
+    new CleanWebpackPlugin(['./django/dist'], {
       // remove old dist on build
       root: BASE_DIR,
       verbose: true,
       dry: false,
     }),
     new ExtractTextPlugin({
-        filename: "css/[name].[contenthash].css", // [name].[contenthash].css
+        filename: "css/[name].[hash].css", // [name].[contenthash].css
         // disable: process.env.NODE_ENV === "development"
     }),
     new HtmlWebpackPlugin({
       template: path.join(SRC_DIR, 'templates/base.html'),
       filename: path.join(DIST_DIR, 'templates/base.html'),
+      inject: false,
       chunks: ['vendor', 'main'],
+    }),
+    new HtmlWebpackPlugin({
+      template: path.join(SRC_DIR, 'templates/discovery/discovery.html'),
+      filename: path.join(DIST_DIR, 'templates/discovery/discovery.html'),
+      inject: false,
+      chunks: ['vendor', 'discovery'],
     })
   ],
 };

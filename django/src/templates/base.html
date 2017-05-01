@@ -4,8 +4,14 @@
      <meta charset="utf-8">
      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
      <meta name="viewport" content="width=device-width, initial-scale=1">
-     <title> Webpack 2 Test </title>
-   <link href="../css/main.08809b917a06a19a1ee1c49a69a46e99.css" rel="stylesheet"></head>
+     <title> Title </title>
+
+     <!-- HTML webpack plugin CSS -->
+     <% for (var css in htmlWebpackPlugin.files.css) { %>
+     <link href="{% static '<%= htmlWebpackPlugin.files.css[css] %>' %}" rel="stylesheet">
+     <% } %>
+
+   </head>
    <body>
     <h1>Hello, World!</h1>
 
@@ -19,5 +25,10 @@
 
     <img src="../assets/worst_ever.jpg" alt="comic book guy">
 
-   <script type="text/javascript" src="../js/vendor.c6877541fb40bc4cf139.js"></script><script type="text/javascript" src="../js/main.c6877541fb40bc4cf139.js"></script></body>
+    <!-- HTML webpack plugin JS -->
+    <% for (var chunk in htmlWebpackPlugin.files.chunks) { %>
+      <script src="{% static '<%= htmlWebpackPlugin.files.chunks[chunk].entry %>' %}"></script>
+    <% } %>
+
+   </body>
  </html>

@@ -1,5 +1,5 @@
 import '../scss/main.scss';
-import '../img/worst_ever.jpg';
+import '../img/_assets.js';
 
 // importing this doesn't pickup icons - USE CDN FOR NOW in main.scss
 // import 'element-ui/lib/theme-default/index.css'
